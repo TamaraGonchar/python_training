@@ -40,7 +40,7 @@ class test_add_group(unittest.TestCase):
         wd.find_element_by_link_text("group page").click()
 
     def create_group(self, wd, group):
-        # init group creation
+        # init group creation         
         wd.find_element_by_name("new").click()
         # fill group form
         wd.find_element_by_name("group_name").click()
