@@ -15,7 +15,6 @@ class address_new(unittest.TestCase):
         self.wd.implicitly_wait(60)
     
     def test_address_new(self):
-        success = True
         wd = self.wd
         # open homa page
         wd.get("http://localhost/addressbook/")
@@ -29,7 +28,9 @@ class address_new(unittest.TestCase):
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
         # open add new page
         wd.find_element_by_link_text("add new").click()
+        # init add new creation
         wd.find_element_by_name("firstname").click()
+        # fill add new form
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys("Anna")
         wd.find_element_by_name("middlename").click()
@@ -99,9 +100,10 @@ class address_new(unittest.TestCase):
         wd.find_element_by_name("notes").click()
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys("16")
+        # enter
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        # logout
         wd.find_element_by_link_text("Logout").click()
-        self.assertTrue(success)
     
     def tearDown(self):
         self.wd.quit()
