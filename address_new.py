@@ -10,15 +10,15 @@ def is_alert_present(wd):
     except:
         return False
 
-class new_address(unittest.TestCase):
+class address_new(unittest.TestCase):
     def setUp(self):
         self.wd = WebDriver(capabilities={"marionette": False})
         self.wd.implicitly_wait(60)
     
-    def test_new(self):
+    def test_address_new(self):
         success = True
         wd = self.wd
-        wd.get("http://localhost/addressbook/edit.php")
+        wd.get("http://localhost/addressbook/")
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys("admin")
@@ -26,6 +26,7 @@ class new_address(unittest.TestCase):
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys("secret")
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+        wd.find_element_by_link_text("add new").click()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys("Anna")
@@ -59,6 +60,7 @@ class new_address(unittest.TestCase):
         wd.find_element_by_name("fax").click()
         wd.find_element_by_name("fax").clear()
         wd.find_element_by_name("fax").send_keys("88000000000")
+        wd.find_element_by_name("theform").click()
         wd.find_element_by_name("email").click()
         wd.find_element_by_name("email").clear()
         wd.find_element_by_name("email").send_keys("an@an.ru")
@@ -78,6 +80,7 @@ class new_address(unittest.TestCase):
         wd.find_element_by_name("byear").click()
         wd.find_element_by_name("byear").clear()
         wd.find_element_by_name("byear").send_keys("1990")
+        wd.find_element_by_name("theform").click()
         if not wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[4]").is_selected():
             wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[4]").click()
         if not wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option[3]").is_selected():
@@ -87,7 +90,7 @@ class new_address(unittest.TestCase):
         wd.find_element_by_name("ayear").send_keys("2010")
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
-        wd.find_element_by_name("address2").send_keys("Lenina yl")
+        wd.find_element_by_name("address2").send_keys("Lenina street")
         wd.find_element_by_name("phone2").click()
         wd.find_element_by_name("phone2").clear()
         wd.find_element_by_name("phone2").send_keys("83")
