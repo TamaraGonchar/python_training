@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.firefox.webdriver import WebDriver
-from selenium.webdriver.common.action_chains import ActionChains
-import time, unittest
+import unittest
 
 def is_alert_present(wd):
     try:
@@ -18,7 +17,9 @@ class address_new(unittest.TestCase):
     def test_address_new(self):
         success = True
         wd = self.wd
+        # open homa page
         wd.get("http://localhost/addressbook/")
+        # login
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys("admin")
@@ -26,6 +27,7 @@ class address_new(unittest.TestCase):
         wd.find_element_by_name("pass").clear()
         wd.find_element_by_name("pass").send_keys("secret")
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
+        # open add new page
         wd.find_element_by_link_text("add new").click()
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
