@@ -24,5 +24,7 @@ class Groupadd:
         self.phone2 = phone2
         self.notes = notes
 
+        #DZ
+
 
 
