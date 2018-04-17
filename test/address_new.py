@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-import unittest
-from addnew import Addnew
-from application import Application
+from model.addnew import Addnew
+from fixture.application import Application
 import pytest
 
 
