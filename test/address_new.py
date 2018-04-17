@@ -13,7 +13,7 @@ def app(request):
 
     
 def test_address_new(app):
-    app.login(username="admin", password="secret")
+    app.session.login(username="admin", password="secret")
     app.create_address(Addnew(
                           name="Anna", middlename="Ivanovna", lastname="Petrova", nickname="AnPet",
                           title="ZAO", company="Romashka", adrdress="Moscow",
@@ -21,11 +21,11 @@ def test_address_new(app):
                           email="an@an.ru", email2="anp@an.ru", email3="aniv@an.ru", homapage="annaivanova.ru",
                           byear="1990", ayear="2010",
                           address2="Lenina street", phone2="83", notes="16"))
-    app.logout()
+    app.session.logout()
 
 
 def test_empty_address_new(app):
-    app.login(username="admin", password="secret")
+    app.session.login(username="admin", password="secret")
     app.create_address(Addnew(
                           name="", middlename="", lastname="", nickname="",
                           title="", company="", adrdress="",
@@ -33,7 +33,7 @@ def test_empty_address_new(app):
                           email="", email2="", email3="", homapage="",
                           byear="", ayear="",
                           address2="", phone2="", notes=""))
-    app.logout()
+    app.session.logout()
 
 
 
