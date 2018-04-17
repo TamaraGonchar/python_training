@@ -16,9 +16,7 @@ class address_new(unittest.TestCase):
     
     def test_address_new(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_add_new_page(wd)
         self.create_group(wd, Addnew(
                           name="Anna", middlename="Ivanovna", lastname="Petrova", nickname="AnPet",
                           title="ZAO", company="Romashka", adrdress="Moscow",
@@ -30,9 +28,7 @@ class address_new(unittest.TestCase):
 
     def test_empty_address_new(self):
         wd = self.wd
-        self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
-        self.open_add_new_page(wd)
         self.create_group(wd, Addnew(
                           name="", middlename="", lastname="", nickname="",
                           title="", company="", adrdress="",
@@ -46,6 +42,7 @@ class address_new(unittest.TestCase):
         wd.find_element_by_link_text("Logout").click()
 
     def create_group(self, wd, addnew):
+        self.open_add_new_page(wd)
         # init add new creation
         wd.find_element_by_name("firstname").click()
         # fill add new form
@@ -125,6 +122,7 @@ class address_new(unittest.TestCase):
         wd.find_element_by_link_text("add new").click()
 
     def login(self, wd, username, password):
+        self.open_home_page(wd)
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
