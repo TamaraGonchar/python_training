@@ -14,7 +14,7 @@ def app(request):
     
 def test_address_new(app):
     app.session.login(username="admin", password="secret")
-    app.create_address(Addnew(
+    app.addnew.createnew(Addnew(
                           name="Anna", middlename="Ivanovna", lastname="Petrova", nickname="AnPet",
                           title="ZAO", company="Romashka", adrdress="Moscow",
                           home="84951234567", mobile="89161234567", work="88001234567", fax="88000000000",
@@ -26,7 +26,7 @@ def test_address_new(app):
 
 def test_empty_address_new(app):
     app.session.login(username="admin", password="secret")
-    app.create_address(Addnew(
+    app.addnew.createnew(Addnew(
                           name="", middlename="", lastname="", nickname="",
                           title="", company="", adrdress="",
                           home="", mobile="", work="", fax="",
