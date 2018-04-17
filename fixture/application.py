@@ -23,3 +23,4 @@ class Application:
         self.wd.quit()
 
 
+    #DZ5

@@ -87,3 +87,5 @@ class AddnewHelper:
     def open_add_new_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
+
+    #DZ5
