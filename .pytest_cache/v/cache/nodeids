@@ -1,4 +1,4 @@
 [
-  "test_add_group.py::test_add_group",
-  "test_add_group.py::test_add_empty_group"
+  "address_new.py::address_new::test_address_new",
+  "address_new.py::address_new::test_empty_address_new"
 ]
