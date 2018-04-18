@@ -12,3 +12,5 @@ def test_mod_first_contact(app):
                           byear="1990", ayear="2010",
                           address2="Mira street", phone2="20", notes="100"))
     app.session.logout()
+
+    #DZ 7
