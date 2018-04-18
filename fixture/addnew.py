@@ -102,6 +102,15 @@ class AddnewHelper:
         self.return_to_home_page()
 
 
+    def mod_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # edit
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+
+
     def open_add_new_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()

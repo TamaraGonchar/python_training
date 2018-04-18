@@ -1,4 +1,3 @@
 [
-  "test/test_add_group.py::test_add_group",
-  "test/test_add_group.py::test_add_empty_group"
+  "test/address_del.py::test_delete_first_contact"
 ]
