@@ -1,17 +1,8 @@
 # -*- coding: utf-8 -*-
 from model.addnew import Addnew
-from fixture.application import Application
-import pytest
 
 
-@pytest.fixture
-def app(request):
-    fixture = Application()
-    request.addfinalizer(fixture.destroy)
-    return fixture
 
-
-    
 def test_address_new(app):
     app.session.login(username="admin", password="secret")
     app.addnew.createnew(Addnew(

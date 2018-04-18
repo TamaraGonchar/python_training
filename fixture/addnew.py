@@ -6,6 +6,11 @@ class AddnewHelper:
         self.app = app
 
 
+    def return_to_home_page(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+
+
     def createnew(self, addnew):
         wd = self.app.wd
         self.open_add_new_page()
@@ -83,6 +88,19 @@ class AddnewHelper:
         wd.find_element_by_name("notes").send_keys(addnew.notes)
         # enter
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        self.return_to_home_page()
+
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+        # select first contact
+        wd.find_element_by_name("selected[]").click()
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+        self.return_to_home_page()
+
 
     def open_add_new_page(self):
         wd = self.app.wd
