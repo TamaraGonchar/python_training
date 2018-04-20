@@ -1,10 +1,10 @@
-from model.addnew import Addnew
+from model.contact import CONTACT
 
 
 def test_mod_first_contact(app):
     app.session.login(username="admin", password="secret")
     app.addnew.mod_first_contact()
-    app.addnew.createnew(Addnew(
+    app.addnew.createnew(CONTACT(
                           name="Vanya", middlename="Petrov", lastname="Ivanich", nickname="VAVA",
                           title="OOO", company="FanFan", adrdress="WWW",
                           home="84997654321", mobile="89107654321", work="88007654321", fax="88001111111",
