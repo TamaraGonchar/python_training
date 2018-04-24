@@ -2,7 +2,6 @@ from model.contact import CONTACT
 
 
 def test_mod_first_contact(app):
-    app.session.login(username="admin", password="secret")
     app.addnew.mod_first_contact()
     app.addnew.createnew(CONTACT(
                           name="Vanya", middlename="Petrov", lastname="Ivanich", nickname="VAVA",
@@ -11,6 +10,5 @@ def test_mod_first_contact(app):
                           email="va@va.ru", email2="Vap@Van.ru", email3="Vaniv@van.ru", homapage="Vannaivanova.ru",
                           byear="1990", ayear="2010",
                           address2="Mira street", phone2="20", notes="100"))
-    app.session.logout()
 
     #DZ 7
