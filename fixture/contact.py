@@ -110,3 +110,4 @@ class ContactHelper:
         self.open_add_new_page()
         return len(wd.find_elements_by_name("selected[]"))
 
+    #DZ 10

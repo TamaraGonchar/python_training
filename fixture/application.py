@@ -29,4 +29,4 @@ class Application:
         self.wd.quit()
 
 
-    #DZ5
+    #DZ 10
