@@ -4,6 +4,7 @@ from model.contact import CONTACT
 
 
 def test_address_new(app):
+    old_addnews = app.addnew.get_addnew_list()
     app.addnew.createnew(CONTACT(
                           name="Anna", middlename="Ivanovna", lastname="Petrova", nickname="AnPet",
                           title="ZAO", company="Romashka", address="Moscow",
@@ -11,9 +12,12 @@ def test_address_new(app):
                           email="an@an.ru", email2="anp@an.ru", email3="aniv@an.ru", homepage="annaivanova.ru",
                           byear="1990", ayear="2010",
                           address2="Lenina street", phone2="83", notes="16"))
+    new_addnews = app.addnew.get_addnew_list()
+    assert len(old_addnews) + 1 == len(new_addnews)
 
 
 def test_empty_address_new(app):
+    old_addnews = app.addnew.get_addnew_list()
     app.addnew.createnew(CONTACT(
                           name="", middlename="", lastname="", nickname="",
                           title="", company="", address="",
@@ -21,6 +25,8 @@ def test_empty_address_new(app):
                           email="", email2="", email3="", homepage="",
                           byear="", ayear="",
                           address2="", phone2="", notes=""))
+    new_addnews = app.addnew.get_addnew_list()
+    assert len(old_addnews) + 1 == len(new_addnews)
 
 
     #DZ5

@@ -1,4 +1,5 @@
 
+from model.contact import CONTACT
 
 class ContactHelper:
 
@@ -109,5 +110,22 @@ class ContactHelper:
         wd = self.app.wd
         self.open_add_new_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+
+    def get_addnew_list(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+        addnews = []
+        for element in wd.find_elements_by_name("entry"):
+                text = element.text
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                addnews.append(CONTACT(name=text, id=id))
+        return addnews
+
+
+
+
+
+
 
     #DZ 10
