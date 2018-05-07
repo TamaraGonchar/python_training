@@ -117,9 +117,10 @@ class ContactHelper:
         wd.find_element_by_link_text("home").click()
         addnews = []
         for element in wd.find_elements_by_name("entry"):
-                text = element.text
+                lastname = element.find_element_by_xpath(".//td[2]").text
+                name = element.find_element_by_xpath(".//td[3]").text
                 id = element.find_element_by_name("selected[]").get_attribute("value")
-                addnews.append(CONTACT(name=text, id=id))
+                addnews.append(CONTACT(name=name, lastname=lastname, id=id))
         return addnews
 
 
