@@ -1,20 +1,23 @@
 from model.contact import CONTACT
+from random import randrange
+
 
 
 def test_mod_contact_name(app):
     if app.addnew.count() == 0:
         app.addnew.createnew(CONTACT(name="Alisa"))
     old_addnews = app.addnew.get_addnew_list()
+    index = randrange(len(old_addnews))
     addnew = CONTACT(name="Klavdiya")
-    addnew.id = old_addnews[0].id
+    addnew.id = old_addnews[index].id
     if addnew.name is None:
-        addnew.name = old_addnews[0].name
+        addnew.name = old_addnews[index].name
     if addnew.lastname is None:
-        addnew.lastname = old_addnews[0].lastname
-    app.addnew.mod_first_contact(addnew)
-    assert len(old_addnews) == app.addnew.count()
+        addnew.lastname = old_addnews[index].lastname
+    app.addnew.mod_contact_by_index(addnew, index)
     new_addnews = app.addnew.get_addnew_list()
-    old_addnews[0] = addnew
+    assert len(old_addnews) == app.addnew.count()
+    old_addnews[index] = addnew
     assert sorted(old_addnews, key=CONTACT.id_or_max) == sorted(new_addnews, key=CONTACT.id_or_max)
 
 
