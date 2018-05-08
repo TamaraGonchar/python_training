@@ -23,6 +23,7 @@ class ContactHelper:
         # enter
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
         self.return_to_home_page()
+        self.addnew_cache = None
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
@@ -80,6 +81,7 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         self.return_to_home_page()
+        self.addnew_cache = None
 
 
     def select_first_contact(self):
@@ -100,6 +102,7 @@ class ContactHelper:
         # submit mod
         # edit
         self.return_to_home_page()
+        self.addnew_cache = None
 
     def open_add_new_page(self):
         wd = self.app.wd
@@ -112,16 +115,20 @@ class ContactHelper:
         return len(wd.find_elements_by_name("selected[]"))
 
 
+    addnew_cache = None
+
+
     def get_addnew_list(self):
-        wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
-        addnews = []
-        for element in wd.find_elements_by_name("entry"):
+        if self.addnew_cache is None:
+            wd = self.app.wd
+            wd.find_element_by_link_text("home").click()
+            self.addnew_cache = []
+            for element in wd.find_elements_by_name("entry"):
                 lastname = element.find_element_by_xpath(".//td[2]").text
                 name = element.find_element_by_xpath(".//td[3]").text
                 id = element.find_element_by_name("selected[]").get_attribute("value")
-                addnews.append(CONTACT(name=name, lastname=lastname, id=id))
-        return addnews
+                self.addnew_cache.append(CONTACT(name=name, lastname=lastname, id=id))
+        return list(self.addnew_cache)
 
 
 

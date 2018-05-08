@@ -12,8 +12,8 @@ def test_mod_contact_name(app):
     if addnew.lastname is None:
         addnew.lastname = old_addnews[0].lastname
     app.addnew.mod_first_contact(addnew)
+    assert len(old_addnews) == app.addnew.count()
     new_addnews = app.addnew.get_addnew_list()
-    assert len(old_addnews) == len(new_addnews)
     old_addnews[0] = addnew
     assert sorted(old_addnews, key=CONTACT.id_or_max) == sorted(new_addnews, key=CONTACT.id_or_max)
 

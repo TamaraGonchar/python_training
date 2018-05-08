@@ -13,26 +13,26 @@ def test_address_new(app):
                           byear="1990", ayear="2010",
                           address2="Lenina street", phone2="83", notes="16")
     app.addnew.createnew(addnew)
+    assert len(old_addnews) + 1 == app.addnew.count()
     new_addnews = app.addnew.get_addnew_list()
-    assert len(old_addnews) + 1 == len(new_addnews)
     old_addnews.append(addnew)
     assert sorted(old_addnews, key=CONTACT.id_or_max) == sorted(new_addnews, key=CONTACT.id_or_max)
 
 
-def test_empty_address_new(app):
-    old_addnews = app.addnew.get_addnew_list()
-    addnew = CONTACT(
-                          name="", middlename="", lastname="", nickname="",
-                          title="", company="", address="",
-                          home="", mobile="", work="", fax="",
-                          email="", email2="", email3="", homepage="",
-                          byear="", ayear="",
-                          address2="", phone2="", notes="")
-    app.addnew.createnew(addnew)
-    new_addnews = app.addnew.get_addnew_list()
-    assert len(old_addnews) + 1 == len(new_addnews)
-    old_addnews.append(addnew)
-    assert sorted(old_addnews, key=CONTACT.id_or_max) == sorted(new_addnews, key=CONTACT.id_or_max)
+#def test_empty_address_new(app):
+#    old_addnews = app.addnew.get_addnew_list()
+#    addnew = CONTACT(
+#                          name="", middlename="", lastname="", nickname="",
+#                          title="", company="", address="",
+#                          home="", mobile="", work="", fax="",
+#                          email="", email2="", email3="", homepage="",
+#                          byear="", ayear="",
+#                          address2="", phone2="", notes="")
+#    app.addnew.createnew(addnew)
+#    new_addnews = app.addnew.get_addnew_list()
+#    assert len(old_addnews) + 1 == len(new_addnews)
+#    old_addnews.append(addnew)
+#    assert sorted(old_addnews, key=CONTACT.id_or_max) == sorted(new_addnews, key=CONTACT.id_or_max)
 
 
 
