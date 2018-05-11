@@ -99,17 +99,14 @@ class ContactHelper:
 
 
     def mod_first_contact(self, new_contact_date):
-        self.select_contact_by_index(0)
+        self.select_contact_by_index(0, new_contact_date)
 
 
-    def mod_contact_by_index(self, new_contact_date,index):
+    def mod_contact_by_index(self, index, new_contact_date):
         wd = self.app.wd
         wd.find_element_by_link_text("home").click()
-        self.select_contact_by_index(index)
-        # open mod form
-        wd.find_element_by_name("selected[]").click()
         # fill contact form
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
         self.fill_contact_form(new_contact_date)
         wd.find_element_by_name("update").click()
         # submit mod

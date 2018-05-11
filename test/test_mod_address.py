@@ -14,7 +14,7 @@ def test_mod_contact_name(app):
         addnew.name = old_addnews[index].name
     if addnew.lastname is None:
         addnew.lastname = old_addnews[index].lastname
-    app.addnew.mod_contact_by_index(addnew, index)
+    app.addnew.mod_contact_by_index(index, addnew)
     new_addnews = app.addnew.get_addnew_list()
     assert len(old_addnews) == app.addnew.count()
     old_addnews[index] = addnew

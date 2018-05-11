@@ -61,10 +61,10 @@ class GroupHelper:
 
 
     def mod_first_group(self, new_group_data):
-        self.mod_group_by_index(0)
+        self.mod_group_by_index(0, new_group_data)
 
 
-    def mod_group_by_index(self, new_group_data, index):
+    def mod_group_by_index(self, index, new_group_data):
         wd = self.app.wd
         self.open_groups_page()
         self.select_group_by_index(index)

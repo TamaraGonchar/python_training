@@ -9,7 +9,7 @@ def test_mod_group_name(app):
     index = randrange(len(old_groups))
     group = Group(name="NEW NAME")
     group.id = old_groups[index].id
-    app.group.mod_group_by_index(group, index)
+    app.group.mod_group_by_index(index, group)
     assert len(old_groups) == app.group.count()
     new_groups = app.group.get_group_list()
     old_groups[index] = group
