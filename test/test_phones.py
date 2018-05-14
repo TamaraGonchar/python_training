@@ -5,6 +5,8 @@ def test_phones_on_home_page(app):
     addnew_from_edit_page = app.addnew.get_addnew_info_from_edit_page(0)
     assert addnew_from_home_page.all_phones_from_home_page == merge_phones_like_on_home_page(addnew_from_edit_page)
 
+
+
 def test_phones_on_contact_view_page(app):
     addnew_from_view_page = app.addnew.get_addnew_from_view_page(0)
     addnew_from_edit_page = app.addnew.get_addnew_info_from_edit_page(0)
@@ -21,3 +23,4 @@ def merge_phones_like_on_home_page(contact):
                             map(lambda x: clear(x),
                                 filter(lambda x: x is not None,
                                        [contact.home, contact.mobile, contact.work, contact.phone2]))))
+

@@ -2,14 +2,17 @@ from sys import maxsize
 
 class CONTACT:
 
-    def __init__(self, name=None, middlename=None, lastname=None, id=None, nickname=None, title=None,
-                 company=None, address=None, home=None, mobile=None, work=None, fax=None, email=None,
+    def __init__(self, name=None, middlename=None, lastname=None, id=None, nickname=None,
+                 title=None, company=None, address=None, home=None, mobile=None, work=None, fax=None, email=None,
                  email2=None, email3=None, homepage=None, byear=None, ayear=None, address2=None, phone2=None,
-                 notes=None, all_phones_from_home_page=None):
+                 notes=None,
+                 all_phones_from_home_page=None, all_emails_from_home_page=None, all_names_from_home_page=None):
         self.name = name
         self.middlename = middlename
         self.lastname = lastname
         self.all_phones_from_home_page = all_phones_from_home_page
+        self.all_emails_from_home_page = all_emails_from_home_page
+        self.all_names_from_home_page = all_names_from_home_page
         self.nickname = nickname
         self.title = title
         self.company = company

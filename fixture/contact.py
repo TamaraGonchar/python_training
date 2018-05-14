@@ -149,12 +149,14 @@ class ContactHelper:
             self.addnew_cache = []
             for element in wd.find_elements_by_name("entry"):
                 cells = element.find_elements_by_tag_name("td")
+                all_names = cells[1+2].text
                 name = cells[2].text
                 lastname = cells[1].text
                 id = cells[0].find_element_by_name("selected[]").get_attribute("value")
                 all_phones = cells[5].text
+                all_emails = cells[4].text
                 self.addnew_cache.append(CONTACT(name=name, lastname=lastname, id=id,
-                                                 all_phones_from_home_page=all_phones))
+                                                 all_phones_from_home_page=all_phones, all_emails_from_home_page=all_emails))
         return list(self.addnew_cache)
 
     def open_addnew_to_edit_by_index(self, index):
@@ -182,9 +184,13 @@ class ContactHelper:
         mobile = wd.find_element_by_name("mobile").get_attribute("value")
         work = wd.find_element_by_name("work").get_attribute("value")
         phone2 = wd.find_element_by_name("phone2").get_attribute("value")
+        email = wd.find_element_by_name("email").get_attribute("value")
+        email2 = wd.find_element_by_name("email2").get_attribute("value")
+        email3 = wd.find_element_by_name("email3").get_attribute("value")
         return CONTACT(name=name, lastname=lastname, id=id,
                        home=home, mobile=mobile,
-                       work=work, phone2=phone2)
+                       work=work, phone2=phone2,
+                       email=email, email2=email2, email3=email3)
 
 
     def get_addnew_from_view_page(self, index):
