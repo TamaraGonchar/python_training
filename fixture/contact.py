@@ -1,5 +1,6 @@
 
 from model.contact import CONTACT
+import re
 
 class ContactHelper:
 
@@ -129,17 +130,80 @@ class ContactHelper:
     addnew_cache = None
 
 
+#    def get_addnew_list(self):
+#        if self.addnew_cache is None:
+#            wd = self.app.wd
+#            wd.find_element_by_link_text("home").click()
+#            self.addnew_cache = []
+#            for element in wd.find_elements_by_name("entry"):
+#                lastname = element.find_element_by_xpath(".//td[2]").text
+#                name = element.find_element_by_xpath(".//td[3]").text
+#                id = element.find_element_by_name("selected[]").get_attribute("value")
+#                self.addnew_cache.append(CONTACT(name=name, lastname=lastname, id=id))
+#        return list(self.addnew_cache)
+
     def get_addnew_list(self):
         if self.addnew_cache is None:
             wd = self.app.wd
             wd.find_element_by_link_text("home").click()
             self.addnew_cache = []
             for element in wd.find_elements_by_name("entry"):
-                lastname = element.find_element_by_xpath(".//td[2]").text
-                name = element.find_element_by_xpath(".//td[3]").text
-                id = element.find_element_by_name("selected[]").get_attribute("value")
-                self.addnew_cache.append(CONTACT(name=name, lastname=lastname, id=id))
+                cells = element.find_elements_by_tag_name("td")
+                name = cells[2].text
+                lastname = cells[1].text
+                id = cells[0].find_element_by_name("selected[]").get_attribute("value")
+                all_phones = cells[5].text
+                self.addnew_cache.append(CONTACT(name=name, lastname=lastname, id=id,
+                                                 all_phones_from_home_page=all_phones))
         return list(self.addnew_cache)
+
+    def open_addnew_to_edit_by_index(self, index):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+        element = wd.find_elements_by_name("entry")[index]
+        cell = element.find_elements_by_tag_name("td")[7]
+        cell.find_element_by_tag_name("a").click()
+
+    def open_addnew_view_by_index(self, index):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+        element = wd.find_elements_by_name("entry")[index]
+        cell = element.find_elements_by_tag_name("td")[6]
+        cell.find_element_by_tag_name("a").click()
+
+
+    def get_addnew_info_from_edit_page(self, index):
+        wd = self.app.wd
+        self.open_addnew_to_edit_by_index(index)
+        name = wd.find_element_by_name("firstname").get_attribute("value")
+        lastname = wd.find_element_by_name("lastname").get_attribute("value")
+        id = wd.find_element_by_name("id").get_attribute("value")
+        home = wd.find_element_by_name("home").get_attribute("value")
+        mobile = wd.find_element_by_name("mobile").get_attribute("value")
+        work = wd.find_element_by_name("work").get_attribute("value")
+        phone2 = wd.find_element_by_name("phone2").get_attribute("value")
+        return CONTACT(name=name, lastname=lastname, id=id,
+                       home=home, mobile=mobile,
+                       work=work, phone2=phone2)
+
+
+    def get_addnew_from_view_page(self, index):
+        wd = self.app.wd
+        self.open_addnew_view_by_index(index)
+        text = wd.find_element_by_id("content").text
+        home = re.search("H: (.*)", text).group(1)
+        mobile = re.search("M: (.*)", text).group(1)
+        work = re.search("W: (.*)", text).group(1)
+        phone2 = re.search("P: (.*)", text).group(1)
+        return CONTACT(home=home, mobile=mobile,
+                       work=work, phone2=phone2)
+
+
+
+
+
+
+
 
 
 
