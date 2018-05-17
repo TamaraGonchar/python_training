@@ -13,7 +13,7 @@ def random_string(prefix, maxlen):
 testdata = [CONTACT(name="", middlename="", lastname="", nickname="nickname",
                     address="address", address2="address2")] + [
     CONTACT(name=random_string("name", 10), lastname=random_string("lastname", 20),
-                   middlename=random_string("middlename", 20), nickname=random_string("nickname", 10),
+            middlename=random_string("middlename", 20), nickname=random_string("nickname", 10),
             address=random_string("address", 30), address2=random_string("address2", 25))
     for i in range(5)
 
