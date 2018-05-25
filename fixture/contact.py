@@ -77,7 +77,6 @@ class ContactHelper:
         self.delete_contact_by_index(0)
 
 
-
     def delete_contact_by_index(self, index):
         wd = self.app.wd
         wd.find_element_by_link_text("home").click()
@@ -89,14 +88,15 @@ class ContactHelper:
         self.addnew_cache = None
 
 
-    def select_contact_by_index(self, index):
+    def delete_contact_by_id(self, id):
         wd = self.app.wd
-        wd.find_elements_by_name("selected[]")[index].click()
-
-
-    def select_first_contact(self):
-        wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
+        wd.find_element_by_link_text("home").click()
+        self.select_contact_by_id(id)
+        # submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+        self.return_to_home_page()
+        self.addnew_cache = None
 
 
     def mod_first_contact(self, new_contact_date):
@@ -106,6 +106,7 @@ class ContactHelper:
     def mod_contact_by_index(self, index, new_contact_date):
         wd = self.app.wd
         wd.find_element_by_link_text("home").click()
+        self.select_contact_by_index(index)
         # fill contact form
         wd.find_elements_by_xpath("//img[@alt='Edit']")[index].click()
         self.fill_contact_form(new_contact_date)
@@ -116,31 +117,52 @@ class ContactHelper:
         self.addnew_cache = None
 
 
+    def mod_contact_by_id(self, id, new_contact_date):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+        self.select_contact_by_id(id)
+        # fill contact form
+        wd.find_element_by_css_selector("a[href='edit.php?id=%s']" % id).click()
+        self.fill_contact_form(new_contact_date)
+        wd.find_element_by_name("update").click()
+        # submit mod
+        # edit
+        self.return_to_home_page()
+        self.addnew_cache = None
+
+
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+
+
+    def select_contact_mod_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("a[href='edit.php?id=%s']" % id).click()
+
+
+    def select_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+
+
+
+
     def open_add_new_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
-
 
     def count(self):
         wd = self.app.wd
         self.return_to_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
-
     addnew_cache = None
-
-
-#    def get_addnew_list(self):
-#        if self.addnew_cache is None:
-#            wd = self.app.wd
-#            wd.find_element_by_link_text("home").click()
-#            self.addnew_cache = []
-#            for element in wd.find_elements_by_name("entry"):
-#                lastname = element.find_element_by_xpath(".//td[2]").text
-#                name = element.find_element_by_xpath(".//td[3]").text
-#                id = element.find_element_by_name("selected[]").get_attribute("value")
-#                self.addnew_cache.append(CONTACT(name=name, lastname=lastname, id=id))
-#        return list(self.addnew_cache)
 
     def get_addnew_list(self):
         if self.addnew_cache is None:
@@ -156,7 +178,8 @@ class ContactHelper:
                 all_emails = cells[4].text
                 address = cells[3].text
                 self.addnew_cache.append(CONTACT(name=name, lastname=lastname, id=id, address=address,
-                                                 all_phones_from_home_page=all_phones, all_emails_from_home_page=all_emails))
+                                                 all_phones_from_home_page=all_phones,
+                                                 all_emails_from_home_page=all_emails))
         return list(self.addnew_cache)
 
     def open_addnew_to_edit_by_index(self, index):

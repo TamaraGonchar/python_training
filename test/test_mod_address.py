@@ -1,34 +1,26 @@
 from model.contact import CONTACT
-from random import randrange
+import random
 
 
-
-def test_mod_contact_name(app):
-    if app.addnew.count() == 0:
+def test_mod_contact_name(app, db, check_ui):
+    if len(db.get_addnew_list()) == 0:
         app.addnew.createnew(CONTACT(name="Alisa"))
-    old_addnews = app.addnew.get_addnew_list()
-    index = randrange(len(old_addnews))
-    addnew = CONTACT(name="Klavdiya")
-    addnew.id = old_addnews[index].id
-    if addnew.name is None:
-        addnew.name = old_addnews[index].name
-    if addnew.lastname is None:
-        addnew.lastname = old_addnews[index].lastname
-    app.addnew.mod_contact_by_index(index, addnew)
-    new_addnews = app.addnew.get_addnew_list()
-    assert len(old_addnews) == app.addnew.count()
-    old_addnews[index] = addnew
+    old_addnews = db.get_addnew_list()
+    mod_addnew = random.choice(old_addnews)
+    new_addnew = CONTACT(name="Klavdiya")
+    new_addnew.id = mod_addnew.id
+    if new_addnew.name is None:
+        new_addnew.name = mod_addnew.name
+    if new_addnew.lastname is None:
+        new_addnew.lastname = mod_addnew.lastname
+    id = new_addnew.id
+    app.addnew.mod_contact_by_id(mod_addnew.id, new_addnew)
+    new_addnews = db.get_addnew_list()
+    old_addnews.remove(mod_addnew)
+    old_addnews.append(new_addnew)
     assert sorted(old_addnews, key=CONTACT.id_or_max) == sorted(new_addnews, key=CONTACT.id_or_max)
+    if check_ui:
+        assert sorted(new_addnews, key=CONTACT.id_or_max) == sorted(app.addnew.get_addnew_list(), key=CONTACT.id_or_max)
 
 
 
-
-#def test_mod_contact_middlename(app):
-#    if app.addnew.count() == 0:
-#        app.addnew.createnew(CONTACT(middlename="Lykoshkina"))
-#    old_addnews = app.addnew.get_addnew_list()
-#    app.addnew.mod_first_contact(CONTACT(middlename="Pyshinina"))
-#    new_addnews = app.addnew.get_addnew_list()
-#    assert len(old_addnews) == len(new_addnews)
-
-    #DZ 7
