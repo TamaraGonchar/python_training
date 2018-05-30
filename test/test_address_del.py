@@ -2,13 +2,13 @@ from model.contact import CONTACT
 import random
 
 
-def test_delete_some_contact(app, db, check_ui):
-    if len(db.get_addnew_list()) == 0:
+def test_delete_some_contact(app, orm, check_ui):
+    if len(orm.get_addnew_list()) == 0:
         app.addnew.createnew(CONTACT(name="Anna", middlename="Ivanovna", lastname="Petrova"))
-    old_addnews = db.get_addnew_list()
+    old_addnews = orm.get_addnew_list()
     contact = random.choice(old_addnews)
     app.addnew.delete_contact_by_id(contact.id)
-    new_addnews = db.get_addnew_list()
+    new_addnews = orm.get_addnew_list()
     assert len(old_addnews) - 1 == len(new_addnews)
     old_addnews.remove(contact)
     assert old_addnews == new_addnews

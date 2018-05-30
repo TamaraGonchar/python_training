@@ -26,4 +26,3 @@ def test_remove_contact_from_group(app, orm):
         addnew = random.choice(orm.get_addnews_in_group(group))
     app.addnew.remove_from_group(addnew.id, group.id)
     assert addnew in orm.get_addnews_not_in_groups(group)
-    

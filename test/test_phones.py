@@ -25,3 +25,10 @@ def merge_phones_like_on_home_page(contact):
                                        [contact.home, contact.mobile, contact.work, contact.phone2]))))
 
 
+
+    #addnew_from_home_page = app.addnew.get_addnew_list()[0]
+    #addnew_from_edit_page = app.addnew.get_addnew_info_from_edit_page(0)
+    #assert addnew_from_home_page.all_emails_from_home_page == merge_emails_like_on_home_page(addnew_from_edit_page)
+    #assert addnew_from_home_page.name == addnew_from_edit_page.name
+    #assert addnew_from_home_page.lastname == addnew_from_edit_page.lastname
+    #assert addnew_from_home_page.address == addnew_from_edit_page.address
